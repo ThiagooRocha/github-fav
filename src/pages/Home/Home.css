@@ -1,0 +1,136 @@
+.Home {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Home .wrappler {
+  margin: 0 auto;
+}
+.Home h1 {
+  transition: all 0.7s;
+  font-size: 70px;
+  line-height: 1.1;
+  text-align: left;
+  margin-bottom: 30px;
+}
+.Home h1 span {
+  color: transparent;
+  font-size: 90px;
+  -webkit-text-stroke: 1px #ffffff;
+  text-stroke: 1px #fff;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  color: #ffffff91;
+  font-size: 20px;
+}
+.container form {
+  display: flex;
+  align-items: center;
+}
+.container .inputUser {
+  margin-top: 10px;
+  outline: none;
+  text-transform: lowercase;
+
+  width: 150px;
+
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid #ffffff91;
+
+  font-size: 24px;
+}
+.container .inputUser.active {
+  transition: all 1s;
+  border-bottom: 2px solid #fff;
+}
+.container .search-btn {
+  background: transparent;
+  padding: 10px;
+  margin-top: 10px;
+
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-15px);
+
+  display: hidden;
+}
+.container .search-btn.active {
+  display: block;
+  transition: transform 0.7s, opacity 0.4s;
+  pointer-events: all;
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+@media screen and (max-width: 790px) {
+  .Home .wrappler {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .Home h1 {
+    font-size: 60px;
+    text-align: left;
+  }
+  .Home h1 span {
+    font-size: 80px;
+  }
+  .Home .container {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 550px) {
+  .Home .wrappler {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .Home h1 {
+    font-size: 50px;
+    text-align: left;
+    margin-bottom: 40px;
+  }
+  .Home h1 span {
+    font-size: 70px;
+  }
+  .container .inputUser {
+    width: 100px;
+  }
+}
+@media screen and (max-width: 490px) {
+  .Home .wrappler {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .container .inputUser {
+    margin: 0;
+    width: 60%;
+  }
+}
+@media screen and (max-width: 380px) {
+  .Home h1 {
+    font-size: 40px;
+  }
+  .Home h1 span {
+    font-size: 50px;
+  }
+  .container {
+    font-size: 13px;
+  }
+  .container .inputUser {
+    font-size: 16px;
+  }
+}
