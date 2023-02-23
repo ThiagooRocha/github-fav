@@ -1,0 +1,14 @@
+.Libary {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+}
+
+.libary_fav_user {
+    height: 100vh;
+    background-color: rgba(21, 21, 46, 0.24);
+    backdrop-filter: blur(50px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}

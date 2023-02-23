@@ -1,11 +1,15 @@
-import React from 'react'
+import './Libary.css'
 
+//Components
 import {UserCard} from '../../components/UserCard'
 
 export function Libary() {
   return (
-    <div>
+    <section className='Libary'>
+        <div className='libary_fav_user'>
+
+        </div>
         <UserCard />
-    </div>
+    </section>
   )
 }

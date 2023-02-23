@@ -1,0 +1,128 @@
+.user_page {
+  display: grid;
+  gap: 20px;
+  padding: 20px 30px 20px 0px;
+  grid-template-columns:minmax(250px, 350px) minmax(350px, 800px);
+  justify-content: center;
+}
+
+.user_card {
+  background-color: rgba(21, 21, 46, 0.24);
+  border-radius: 8px;
+  padding: 20px 10px;
+  height: min-content;
+  backdrop-filter: blur(10px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+.user_card .box_img {
+  position: relative;
+  display: flex;
+  width: 200px;
+  border-radius: 100%;
+  border: #0f477585 7px solid;
+}
+.user_card .box_img img {
+    border-radius: 100%;
+    border: transparent 7px solid;
+}
+
+
+.user_card .card_header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  color: #afafaf;
+}
+.user_card .card_header .header_infos {
+  padding-inline: 40px;
+  color: white;
+}
+.user_card .card_header .header_infos h1 {
+  line-height: 1;
+}
+.user_card .card_header .header_infos h2 {
+  color: #afafaf;
+  font-weight: 300;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.user_card .card_header .header_infos p {
+  font-size: 15px;
+}
+.user_card .card_header .box_followers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.user_card .card_header .box_followers p {
+  display: flex;
+  align-items: center;
+}
+.user_card .card_header .box_followers strong {
+  margin-right: 5px;
+}
+
+.user_repos {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: rgba(21, 21, 46, 0.24);
+  backdrop-filter: blur(10px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  height: 90vh;
+}
+.user_repos h2 {
+  width: min-content;
+  border-bottom: #afafaf 3px solid;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.user_repos .repos_header {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.user_repos .repos_header form {
+  width: 100%;
+}
+.user_repos .repos_header input {
+  width: 100%;
+  background-color: transparent;
+  border: #afafaf solid 1px;
+  border-radius: 5px;
+  height: 30px;
+  padding-left: 10px;
+}
+
+.container_repos {
+  padding-right: 10px;
+  overflow-y: scroll;
+}
+
+.user_repos .card_repos {
+  color: rgb(230, 230, 230);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: #afafaf4d solid 1px;
+}
+.user_repos .card_repos p {
+  font-size: 20px;
+}
+.user_repos .card_repos small {
+  color: rgb(187, 187, 187);
+}
+.user_repos .card_repos_infos {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: end;
+}
