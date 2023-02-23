@@ -74,8 +74,12 @@
   background-color: rgba(21, 21, 46, 0.24);
   backdrop-filter: blur(10px);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-  height: 90vh;
+  height: min-content;
 }
+::-webkit-scrollbar {
+  display: none;
+}
+
 .user_repos h2 {
   width: min-content;
   border-bottom: #afafaf 3px solid;
@@ -83,7 +87,9 @@
   align-items: center;
   margin-bottom: 15px;
 }
-
+.user_repos h2 svg {
+  margin-bottom: -5px;
+}
 .user_repos .repos_header {
   display: flex;
   gap: 20px;
@@ -95,8 +101,10 @@
 }
 .user_repos .repos_header input {
   width: 100%;
-  background-color: transparent;
   border: #afafaf solid 1px;
+  border: none;
+  background-color: rgba(21, 21, 46, 0.336);
+  backdrop-filter: blur(50px);
   border-radius: 5px;
   height: 30px;
   padding-left: 10px;
@@ -113,6 +121,9 @@
   margin-bottom: 10px;
   border-radius: 5px;
   border: #afafaf4d solid 1px;
+  border: none;
+  background-color: #0f477544;
+  backdrop-filter: blur(50px);
 }
 .user_repos .card_repos p {
   font-size: 20px;
@@ -125,4 +136,43 @@
   gap: 5px;
   align-items: center;
   justify-content: end;
+}
+
+@media screen and (max-width: 830px) {
+  .user_page {
+    grid-template-columns: auto;
+  }
+}
+@media screen and (max-width: 530px) {
+  .user_page {
+    padding: 20px;
+    padding-left: 70px;
+  }
+  .user_card .box_img {
+    width: 150px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .user_card .card_header {
+    flex-direction: row-reverse;
+  }
+  .user_card .card_header .header_infos {
+    padding: 0;
+  }
+  .user_card .card_header .header_infos p, .user_card .card_header .box_followers {
+    display: none;
+  }
+  .user_card .box_img {
+    width: 120px;
+  }
+}
+@media screen and (max-width: 404px) {
+  .user_card .card_header {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 364px) {
+  .user_card .card_header .header_infos {
+    padding-inline: 5px;
+  }
 }

@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react';
 import './Home.css'
+import { useNavigate } from 'react-router-dom';
 
 import { MagnifyingGlass } from "phosphor-react";
 const url = `https://api.github.com/users/`;
@@ -29,10 +30,13 @@ export function Home() {
 
   const [inputUser, setInputUser] = useState<string>("");
   const validation = inputUser !== "";
+  const navigate = useNavigate()
+
 
   async function fetchUser(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    navigate('/libary')
     /* if (validation) {
       try {
         const urlApi = await fetch(`${url}${inputUser}`);

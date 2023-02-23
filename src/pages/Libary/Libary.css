@@ -1,14 +1,111 @@
 .Libary {
-    position: relative;
-    z-index: 10;
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 30px;
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 30px;
+  transition: all 0.3s;
+}
+.Libary.active {
+  grid-template-columns: 300px 1fr;
+  transition: all 0.3s;
+}
+.menu_libary {
+  position: relative;
+  min-height: 100vh;
+  background-color: rgba(21, 21, 46, 0.24);
+  backdrop-filter: blur(50px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+.menu_libary button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  right: -5%;
+  top: 10%;
+  background-color: rgba(21, 21, 46, 0.877);
+  backdrop-filter: blur(50px);
 }
 
-.libary_fav_user {
-    height: 100vh;
-    background-color: rgba(21, 21, 46, 0.24);
-    backdrop-filter: blur(50px);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+@media screen and (max-width: 1000px) {
+  .Libary.active .user_page {
+    grid-template-columns: auto;
+  }
+  .Libary.active .user_card .card_header {
+    flex-direction: column;
+  }
+  .Libary.active .user_card .card_header .box_followers {
+    display: flex;
+  }
+  .Libary.active .user_card .box_img {
+    width: 200px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .Libary {
+    grid-template-columns: 70px 1fr;
+  }
+  .Libary.active {
+    grid-template-columns: 200px 1fr;
+  }
+}
+@media screen and (max-width: 530px) {
+  .Libary {
+    display: block;
+    grid-template-columns: 70px 1fr;
+  }
+  .Libary.active {
+    display: block;
+    grid-template-columns: 200px 1fr;
+  }
+  .menu_libary {
+    position: fixed;
+    width: 50px;
+    z-index: 1;
+    transition: all 0.3s;
+  }
+  .menu_libary button {
+    padding: 3px;
+    width: 45px;
+    height: 35px;
+  }
+  .Libary.active .user_card .card_header .header_infos {
+    padding-inline: 40px;
+  }
+  .Libary.active .menu_libary {
+    width: 60%;
+  }
+  .Libary.active .user_card .box_img {
+    width: 150px;
+  }
+  .Libary.active .user_page {
+    padding: 20px;
+    padding-left: 70px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .Libary.active .user_card .card_header {
+    flex-direction: row-reverse;
+  }
+  .Libary.active .user_card .card_header .header_infos {
+    padding: 0;
+  }
+  .Libary.active .user_card .card_header .header_infos p,
+  .Libary.active .user_card .card_header .box_followers {
+    display: none;
+  }
+  .Libary.active .menu_libary {
+    width: 80%;
+  }
+  .Libary.active .user_card .box_img {
+    width: 120px;
+  }
+}
+@media screen and (max-width: 404px) {
+  .Libary.active .user_card .card_header {
+    flex-direction: column;
+  }
 }

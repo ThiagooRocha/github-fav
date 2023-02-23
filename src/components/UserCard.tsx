@@ -109,7 +109,7 @@ export function UserCard() {
               </div>
 
               <div className="user_repos">
-                <h2><Book size={32} /> Repositories</h2>
+                <h2><Book size={25} /> Repositories</h2>
                 <div className="repos_header">
                   <form>
                     <input type="text" placeholder="Find a repository..." />
