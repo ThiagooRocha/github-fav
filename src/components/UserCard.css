@@ -15,7 +15,6 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 .user_card .box_img {
-  position: relative;
   display: flex;
   width: 200px;
   border-radius: 100%;
@@ -28,6 +27,7 @@
 
 
 .user_card .card_header {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,6 +35,13 @@
   gap: 20px;
 
   color: #afafaf;
+}
+.user_card .card_header > svg {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  fill: white;
 }
 .user_card .card_header .header_infos {
   padding-inline: 40px;
@@ -63,7 +70,7 @@
   align-items: center;
 }
 .user_card .card_header .box_followers strong {
-  margin-right: 5px;
+  margin-inline: 3px;
 }
 
 .user_repos {
@@ -82,6 +89,7 @@
 
 .user_repos h2 {
   width: min-content;
+  font-size: 24px;
   border-bottom: #afafaf 3px solid;
   display: flex;
   align-items: center;
@@ -106,7 +114,7 @@
   background-color: rgba(21, 21, 46, 0.336);
   backdrop-filter: blur(50px);
   border-radius: 5px;
-  height: 30px;
+  height: 45px;
   padding-left: 10px;
 }
 
@@ -130,12 +138,20 @@
 }
 .user_repos .card_repos small {
   color: rgb(187, 187, 187);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 .user_repos .card_repos_infos {
   display: flex;
   gap: 5px;
   align-items: center;
   justify-content: end;
+}
+.user_repos .card_repos_infos a {
+  display: flex;
+  align-items: center;
 }
 
 @media screen and (max-width: 830px) {
@@ -153,9 +169,6 @@
   }
 }
 @media screen and (max-width: 450px) {
-  .user_card .card_header {
-    flex-direction: row-reverse;
-  }
   .user_card .card_header .header_infos {
     padding: 0;
   }
@@ -165,10 +178,16 @@
   .user_card .box_img {
     width: 120px;
   }
+  .user_repos .repos_header {
+    display: block;
+  }
 }
 @media screen and (max-width: 404px) {
   .user_card .card_header {
     flex-direction: column;
+  }
+  .user_repos .card_repos p {
+    font-size: 15px;
   }
 }
 @media screen and (max-width: 364px) {

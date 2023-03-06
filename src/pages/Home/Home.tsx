@@ -1,22 +1,26 @@
-import { useState, FormEvent } from 'react';
-import './Home.css'
-import { useNavigate } from 'react-router-dom';
-
+import { useState, FormEvent } from "react";
+import "./Home.css";
 import { MagnifyingGlass } from "phosphor-react";
 const url = `https://api.github.com/users/`;
 
+//Router
+import { useNavigate } from "react-router-dom";
+
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../../features/githubUserRedux";
+
 interface UserData {
   id: number;
+  name: string;
   login: string;
   bio: string;
   avatar_url: string;
   repos_url: string;
-  repos: UserRepos[];
-  followers_url: string;
-	following_url: string;
+  followers: number;
+  following: number;
   message?: string;
 }
-
 interface UserRepos {
   id: number;
   name: string;
@@ -24,20 +28,20 @@ interface UserRepos {
   html_url: string;
   created_at: string;
   updated_at: string;
+  visibility?: string;
 }
 
 export function Home() {
+  const dispatch = useDispatch();
 
   const [inputUser, setInputUser] = useState<string>("");
   const validation = inputUser !== "";
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   async function fetchUser(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    navigate('/libary')
-    /* if (validation) {
+    if (validation) {
       try {
         const urlApi = await fetch(`${url}${inputUser}`);
         const data = (await urlApi.json()) as UserData;
@@ -45,17 +49,18 @@ export function Home() {
         if (data.message === "Not Found") {
           console.log("Usúario não encontrado!");
         } else {
-          setUsers((prev) => [...prev, data]);
+          dispatch(getUser({ data }));
+          navigate("/libary");
         }
       } catch (error) {
         console.log(error);
       }
-    } */
+    }
   }
 
   return (
-    <div className='Home'>
-        <div className="wrappler">
+    <div className="Home">
+      <div className="wrappler">
         <h1>
           Pesquise seu usuário
           <br />
@@ -77,5 +82,5 @@ export function Home() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -2,7 +2,7 @@
   position: relative;
   z-index: 10;
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: 70px 1fr;
   gap: 30px;
   transition: all 0.3s;
 }
@@ -10,6 +10,7 @@
   grid-template-columns: 300px 1fr;
   transition: all 0.3s;
 }
+
 .menu_libary {
   position: relative;
   min-height: 100vh;
@@ -24,10 +25,66 @@
   align-items: center;
   justify-content: center;
   height: 45px;
-  right: -5%;
-  top: 10%;
+  right: -15%;
+  top: 10px;
   background-color: rgba(21, 21, 46, 0.877);
   backdrop-filter: blur(50px);
+}
+.Libary.active .menu_libary button {
+  right: -5%;
+}
+
+
+.menu_libary .cards_fav_users {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px;
+  padding-top: 60px;
+}
+.menu_libary .cards_fav_users .card_fav_user h2 {
+  visibility: hidden;
+  pointer-events: none;
+  display: none;
+}
+.menu_libary .card_fav_user .box_img {
+  display: flex;
+  width: 100%;
+  border-radius: 100%;
+  border: #0f477585 4px solid;
+  transition: all .3s;
+}
+.menu_libary .card_fav_user img {
+  border-radius: 100%;
+  border: rgba(255, 255, 255, 0) 4px solid;
+  filter: grayscale(100%);
+}
+
+.Libary.active .menu_libary .cards_fav_users {
+  padding: 20px;
+  cursor: pointer;
+}
+.Libary.active .menu_libary .cards_fav_users .card_fav_user {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #0f477544;
+  padding: 10px;
+  border-radius: 8px;
+}
+.Libary.active .menu_libary .cards_fav_users .card_fav_user h2 {
+  display: block;
+  visibility: visible;
+  pointer-events: all;
+  transition: all .3s;
+}
+.Libary.active .menu_libary .card_fav_user .box_img {
+  width: 70px;
+}
+.Libary.active .card_fav_user img {
+  filter: grayscale(0%);
 }
 
 @media screen and (max-width: 1000px) {
@@ -50,6 +107,9 @@
   }
   .Libary.active {
     grid-template-columns: 200px 1fr;
+  }
+  .Libary.active .menu_libary .cards_fav_users .card_fav_user {
+    flex-direction: column;
   }
 }
 @media screen and (max-width: 530px) {
@@ -84,6 +144,12 @@
   .Libary.active .user_page {
     padding: 20px;
     padding-left: 70px;
+  }
+  .Libary.active .menu_libary .cards_fav_users .card_fav_user {
+    flex-direction: row;
+  }
+  .Libary.active .menu_libary .cards_fav_users .card_fav_user h2 {
+    font-size: 18px;
   }
 }
 @media screen and (max-width: 450px) {
