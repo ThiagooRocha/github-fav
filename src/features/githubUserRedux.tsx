@@ -47,8 +47,19 @@ export const githubUserSlice = createSlice({
 
       return newObj;
     },
+    removeUserOnFav: (state, action) => {
+      const user = action.payload.githubUser;
+      const removeFavUser = state.favUsers.filter(item => item.id !== user.id) 
+
+      const newObj = {
+        user: state.user,
+        favUsers: removeFavUser
+      }
+
+      return newObj
+    }
   },
 });
 
-export const { getUser, addUserOnFav } = githubUserSlice.actions;
+export const { getUser, addUserOnFav, removeUserOnFav } = githubUserSlice.actions;
 export const githubUserReducer = githubUserSlice.reducer;
