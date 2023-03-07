@@ -79,6 +79,7 @@
   visibility: visible;
   pointer-events: all;
   transition: all .3s;
+  font-size: 18px;
 }
 .Libary.active .menu_libary .card_fav_user .box_img {
   width: 70px;
@@ -131,6 +132,12 @@
     padding: 3px;
     width: 45px;
     height: 35px;
+  }
+  .menu_libary .card_fav_user .box_img {
+    border: #0f477585 2px solid;
+  }
+  .menu_libary .card_fav_user img {
+    border: 0px;
   }
   .Libary.active .user_card .card_header .header_infos {
     padding-inline: 40px;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Libary.css";
-import { Planet } from "phosphor-react";
+import { Planet, MagnifyingGlass } from "phosphor-react";
 
 //Components
 import { UserCard } from "../../components/UserCard";
@@ -40,7 +40,7 @@ export function Libary() {
   return (
     <section className={openMenu ? "Libary active" : "Libary"}>
       <div className="menu_libary">
-      <Link to='/'>Home</Link>
+      <Link to='/'><MagnifyingGlass size={30} /></Link>
         <button onClick={() => setOpenMenu(!openMenu)}>
           <Planet size={25} />
         </button>

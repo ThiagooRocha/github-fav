@@ -4,7 +4,7 @@ import { Star, Users, Book, ArrowSquareOut, Checks } from "phosphor-react";
 
 //Redux
 import { useDispatch, useSelector } from "react-redux";
-import { addUserOnFav } from "../features/githubUserRedux"
+import { addUserOnFav, removeUserOnFav } from "../features/githubUserRedux";
 
 interface UserRepos {
   id: number;
@@ -18,16 +18,15 @@ interface UserRepos {
 
 export function UserCard() {
   const githubUser = useSelector((state: any) => state.githubUser.user);
-  
-  const dispatch = useDispatch()
+  const favUsers = useSelector((state: any) => state.githubUser.favUsers);
+
+  const dispatch = useDispatch();
 
   const [userRepos, setUserRepos] = useState<UserRepos[]>([]);
   const [favUser, setFavUser] = useState<boolean>(false);
-  
-  if(githubUser == null) {
-    return (
-      <div>Nenhum</div>
-    )
+
+  if (githubUser == null) {
+    return <div>Nenhum</div>;
   }
 
   async function fetchUserRepos() {
@@ -41,20 +40,35 @@ export function UserCard() {
     }
   }
 
+  function verifFavUser() {
+    favUsers.find((item: any) => {
+      if (item.id === githubUser.id) {
+        return setFavUser(true);
+      }
+    });
+  }
+
   function addFavUser() {
-    if(!favUser){
-      dispatch(addUserOnFav({githubUser}))
-      setFavUser(true)
+    if (!favUser) {
+      dispatch(addUserOnFav({ githubUser }));
+      setFavUser(true);
+    }
+  }
+  function removeFavUser() {
+    if (favUser) {
+      dispatch(removeUserOnFav({ githubUser }));
+      setFavUser(false);
     }
   }
 
   function convertDate(date: string) {
-    date.slice()
-    console.log(date)
+    date.slice();
+    console.log(date);
   }
 
   useEffect(() => {
     fetchUserRepos();
+    verifFavUser();
   }, [githubUser]);
 
   return (
@@ -66,7 +80,11 @@ export function UserCard() {
               <img src={githubUser.avatar_url} alt={githubUser.login} />
             </div>
 
-            {favUser? <Star size={30} onClick={addFavUser} weight='fill' /> : <Star size={30} onClick={addFavUser}/> }
+            {favUser ? (
+              <Star size={30} onClick={removeFavUser} weight="fill" />
+            ) : (
+              <Star size={30} onClick={addFavUser} />
+            )}
 
             <div className="header_infos">
               <h1>{githubUser.name}</h1>
@@ -76,7 +94,8 @@ export function UserCard() {
 
             <div className="box_followers">
               <p>
-                <Users size={18} weight="bold" /> <strong>{githubUser.followers}</strong> followers
+                <Users size={18} weight="bold" />{" "}
+                <strong>{githubUser.followers}</strong> followers
               </p>
               <p>
                 <strong>{githubUser.following}</strong> following
@@ -109,7 +128,7 @@ export function UserCard() {
                     <ArrowSquareOut size={20} />
                   </a>
                   <small title="created at">
-                    <Checks size={20} color='#535bf2' />
+                    <Checks size={20} color="#535bf2" />
                     {repo.updated_at}
                   </small>
                 </div>
