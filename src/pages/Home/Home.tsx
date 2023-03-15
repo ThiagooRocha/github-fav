@@ -7,7 +7,7 @@ const url = `https://api.github.com/users/`;
 import { useNavigate } from "react-router-dom";
 
 //Redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getUser } from "../../features/githubUserRedux";
 
 interface UserData {
