@@ -25,6 +25,13 @@ export function UserCard() {
   const [userRepos, setUserRepos] = useState<UserRepos[]>([]);
   const [favUser, setFavUser] = useState<boolean>(false);
 
+  useEffect(() => {
+    verifFavUser()
+    if(githubUser){
+      fetchUserRepos();
+    }
+  }, [githubUser]);
+
   if (githubUser == null) {
     return <div>Nenhum</div>;
   }
@@ -41,7 +48,8 @@ export function UserCard() {
   }
 
   function verifFavUser() {
-    favUsers.find((item: any) => {
+    setFavUser(false)
+    favUsers.map((item: any) => {
       if (item.id === githubUser.id) {
         return setFavUser(true);
       }
@@ -61,15 +69,12 @@ export function UserCard() {
     }
   }
 
-  function convertDate(date: string) {
-    date.slice();
-    console.log(date);
-  }
+  /* function convertDate(date: string) {
+    let dates = '2022-02-18T14:08:58Z'
+    const convertedDate = dates.slice(0,10)
+    console.log(convertedDate.split('-').reverse().join('/'))
+  } */
 
-  useEffect(() => {
-    fetchUserRepos();
-    verifFavUser();
-  }, [githubUser]);
 
   return (
     <div>
