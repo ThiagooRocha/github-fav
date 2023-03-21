@@ -5,6 +5,7 @@ const url = `https://api.github.com/users/`;
 
 //Components
 import { UserCard } from "../../components/UserCard";
+import { StatusCard } from "../../components/StatusCard";
 
 //Router
 import { useNavigate } from "react-router-dom";
@@ -12,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../features/githubUserRedux";
-
 
 interface UserData {
   id: number;
@@ -25,19 +25,33 @@ interface UserData {
   following: number;
   message?: string;
 }
+interface InitState {
+  user: null | UserData;
+  favUsers: UserData[];
+}
+interface SelectorState {
+  githubUser: InitState;
+}
 
 export function Libary() {
-  const [openMenu, setOpenMenu] = useState(false);
+  const favUsers = useSelector(
+    (state: SelectorState) => state.githubUser.favUsers
+  );
   const githubUser = useSelector((state: any) => state.githubUser.user);
-  const favUsers = useSelector((state: any) => state.githubUser.favUsers);
   const dispatch = useDispatch();
 
+  const [openMenu, setOpenMenu] = useState(false);
   const [inputUser, setInputUser] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [messageError, setMessageError] = useState<string>("");
+
   const validation = inputUser !== "";
   const navigate = useNavigate();
 
   function navigateToUser(user: UserData) {
     if (user.id !== githubUser.id) {
+      setError(false);
       const data = user;
       dispatch(getUser({ data }));
     }
@@ -47,32 +61,49 @@ export function Libary() {
     e.preventDefault();
 
     if (validation) {
+      setLoading(true);
+      setError(false);
       try {
         const urlApi = await fetch(`${url}${inputUser}`);
         const data = (await urlApi.json()) as UserData;
 
         if (data.message === "Not Found") {
-          console.log("Usúario não encontrado!");
+          setLoading(false);
+          setError(true);
+          setMessageError("Usúario não encontrado!");
+          setInputUser("");
         } else {
           dispatch(getUser({ data }));
           navigate("/libary");
-          setInputUser('')
+          setInputUser("");
+          setError(false);
+          setLoading(false);
         }
       } catch (error) {
         console.log(error);
-        setInputUser('')
+        setInputUser("");
+        setLoading(false);
+        setError(true);
+        setMessageError("erro");
       }
     }
   }
 
   return (
     <section className={openMenu ? "Libary active" : "Libary"}>
+      {loading && <StatusCard />}
+      {error && <StatusCard message={messageError} error />}
+
       <div className="menu_libary">
         <div className="container_btn">
-
           <form className="search_box" onSubmit={fetchUser}>
             <MagnifyingGlass size={25} />
-            <input type="text" placeholder="Search a user" value={inputUser} onChange={(e) => setInputUser(e.target.value)}/>
+            <input
+              type="text"
+              placeholder="Search a user"
+              value={inputUser}
+              onChange={(e) => setInputUser(e.target.value)}
+            />
           </form>
 
           <button onClick={() => setOpenMenu(!openMenu)}>

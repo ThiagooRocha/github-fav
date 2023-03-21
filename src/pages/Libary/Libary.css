@@ -55,6 +55,7 @@
   background-color: transparent;
   font-size: 14px;
   padding-left: 5px;
+  text-transform: lowercase;
   outline: none;
 }
 

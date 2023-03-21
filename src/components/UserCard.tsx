@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import "./UserCard.css";
 import { Star, Users, Book, ArrowSquareOut, Checks } from "phosphor-react";
 
+//Components
+import { StatusCard } from "./StatusCard";
+
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { addUserOnFav, removeUserOnFav } from "../features/githubUserRedux";
@@ -24,10 +27,11 @@ export function UserCard() {
 
   const [userRepos, setUserRepos] = useState<UserRepos[]>([]);
   const [favUser, setFavUser] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    verifFavUser()
-    if(githubUser){
+    verifFavUser();
+    if (githubUser) {
       fetchUserRepos();
     }
   }, [githubUser]);
@@ -37,18 +41,21 @@ export function UserCard() {
   }
 
   async function fetchUserRepos() {
+    setLoading(true);
     try {
       const userReposApi = await fetch(githubUser.repos_url);
       const data = await userReposApi.json();
 
       setUserRepos(data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   }
 
   function verifFavUser() {
-    setFavUser(false)
+    setFavUser(false);
     favUsers.map((item: any) => {
       if (item.id === githubUser.id) {
         return setFavUser(true);
@@ -69,16 +76,15 @@ export function UserCard() {
     }
   }
 
-  /* function convertDate(date: string) {
-    let dates = '2022-02-18T14:08:58Z'
-    const convertedDate = dates.slice(0,10)
-    console.log(convertedDate.split('-').reverse().join('/'))
-  } */
-
+  function convertDate(date: string) {
+    const convertedDate = date.slice(0, 10);
+    return convertedDate.split("-").reverse().join("/");
+  }
 
   return (
     <div>
       <div className="user_page">
+        {loading && <StatusCard />}
         <div className="user_card">
           <div className="card_header">
             <div className="box_img">
@@ -125,20 +131,26 @@ export function UserCard() {
           </div>
 
           <div className="container_repos">
-            {userRepos.map((repo: UserRepos) => (
-              <div key={repo.id} className="card_repos">
-                <p>{repo.name}</p>
-                <div className="card_repos_infos">
-                  <a href={repo.html_url} target="_blank" title="show more">
-                    <ArrowSquareOut size={20} />
-                  </a>
-                  <small title="created at">
-                    <Checks size={20} color="#535bf2" />
-                    {repo.updated_at}
-                  </small>
-                </div>
-              </div>
-            ))}
+            {loading ? (
+              <p>Carregando...</p>
+            ) : (
+              <>
+                {userRepos.map((repo: UserRepos) => (
+                  <div key={repo.id} className="card_repos">
+                    <p>{repo.name}</p>
+                    <div className="card_repos_infos">
+                      <a href={repo.html_url} target="_blank" title="show more">
+                        <ArrowSquareOut size={20} />
+                      </a>
+                      <small title="created at">
+                        <Checks size={20} color="#535bf2" />
+                        {convertDate(repo.created_at)}
+                      </small>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
