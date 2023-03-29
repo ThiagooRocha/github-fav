@@ -71,13 +71,13 @@ export function Libary() {
           setLoading(false);
           setError(true);
           setMessageError("Usúario não encontrado!");
-          setInputUser("");
         } else {
           dispatch(getUser({ data }));
           navigate("/libary");
           setInputUser("");
           setError(false);
           setLoading(false);
+          setOpenMenu(false);
         }
       } catch (error) {
         console.log(error);
@@ -89,7 +89,12 @@ export function Libary() {
     }
   }
 
+  if (githubUser == null) {
+    return navigate("/");
+  }
+
   return (
+    
     <section className={openMenu ? "Libary active" : "Libary"}>
       {loading && <StatusCard />}
       {error && <StatusCard message={messageError} error />}
@@ -125,6 +130,12 @@ export function Libary() {
           ))}
         </div>
       </div>
+      <div
+        className="menu_libary_overlay"
+        onClick={() => {
+          setOpenMenu(false);
+        }}
+      />
       <UserCard />
     </section>
   );
