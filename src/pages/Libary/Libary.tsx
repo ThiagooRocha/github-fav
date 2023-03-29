@@ -90,7 +90,7 @@ export function Libary() {
   }
 
   if (githubUser == null) {
-    return navigate("/");
+    navigate("/");
   }
 
   return (
