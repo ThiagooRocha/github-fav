@@ -1,10 +1,11 @@
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import "./Libary.css";
 import { Planet, MagnifyingGlass } from "phosphor-react";
 const url = `https://api.github.com/users/`;
 
 //Components
 import { UserCard } from "../../components/UserCard";
+import { UserRepos } from "../../components/UserRepos";
 import { StatusCard } from "../../components/StatusCard";
 
 //Router
@@ -49,6 +50,10 @@ export function Libary() {
   const validation = inputUser !== "";
   const navigate = useNavigate();
 
+  if (githubUser == null) {
+    navigate("/");
+  }
+
   function navigateToUser(user: UserData) {
     if (user.id !== githubUser.id) {
       setError(false);
@@ -89,12 +94,7 @@ export function Libary() {
     }
   }
 
-  if (githubUser == null) {
-    navigate("/");
-  }
-
   return (
-    
     <section className={openMenu ? "Libary active" : "Libary"}>
       {loading && <StatusCard />}
       {error && <StatusCard message={messageError} error />}
@@ -136,7 +136,10 @@ export function Libary() {
           setOpenMenu(false);
         }}
       />
-      <UserCard />
+      <div className="user_page">
+        <UserCard />
+        <UserRepos />
+      </div>
     </section>
   );
 }
