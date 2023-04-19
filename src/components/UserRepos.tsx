@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import './UserRepos.css'
 import { Book, ArrowSquareOut, Checks } from "phosphor-react";
+
 
 //Redux
 import { useSelector } from "react-redux";
@@ -21,11 +23,13 @@ export function UserRepos() {
   const [loading, setLoading] = useState<boolean>(false);
 
   const [searchInput, setSearchInput] = useState<string>("");
-  const [selectValue, setSelectValue] = useState<string>("lastUpdate");
+  const [selectValue, setSelectValue] = useState<string>("name");
 
   useEffect(() => {
     if (githubUser) {
       fetchUserRepos();
+      setSearchInput("");
+      setSelectValue("name");
     }
   }, [githubUser]);
 
@@ -44,8 +48,8 @@ export function UserRepos() {
   }
 
   function convertRepoDate(date: string) {
-    const convertedDate = date.slice(0, 10);
-    return convertedDate.split("-").reverse().join("/");
+    const convertedDate = date.toString().slice(0, 10);
+    return convertedDate;
   }
 
   function findRepository() {
@@ -54,6 +58,29 @@ export function UserRepos() {
     });
 
     return filteredRepos;
+  }
+
+  function sortUserRepos(e: any) {
+    const value = e.target.value;
+    if (value === "lastUpdate") {
+      setSelectValue(value);
+      sortByLastUpadate();
+    } else if (value === "name") {
+      setSelectValue(value);
+      sortByName();
+    }
+  }
+
+  function sortByName() {
+    userRepos.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  function sortByLastUpadate() {
+    userRepos.sort(function (a, b) {
+      return (
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+    });
   }
 
   return (
@@ -76,9 +103,9 @@ export function UserRepos() {
             onChange={(e) => setSearchInput(e.target.value)}
           />
         </form>
-        <select name="select" onChange={(e) => setSelectValue(e.target.value)}>
-          <option value="lastUpdate">Last update</option>
+        <select name="select" value={selectValue} onChange={sortUserRepos}>
           <option value="name">Name</option>
+          <option value="lastUpdate">Last update</option>
         </select>
       </div>
 

@@ -73,92 +73,6 @@
   margin-inline: 3px;
 }
 
-.user_repos {
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  padding: 20px;
-  background-color: rgba(21, 21, 46, 0.24);
-  backdrop-filter: blur(10px);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-  height: min-content;
-}
-::-webkit-scrollbar {
-  display: none;
-}
-
-.user_repos h2 {
-  width: min-content;
-  font-size: 24px;
-  border-bottom: #afafaf 3px solid;
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-.user_repos h2 svg {
-  margin-bottom: -5px;
-}
-.user_repos .repos_header {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.user_repos .repos_header form {
-  width: 100%;
-}
-.user_repos .repos_header input {
-  width: 100%;
-  border: #afafaf solid 1px;
-  border: none;
-  background-color: rgba(21, 21, 46, 0.336);
-  backdrop-filter: blur(50px);
-  border-radius: 5px;
-  height: 45px;
-  padding-left: 10px;
-  border: 1px solid transparent;
-  transition: border-color 0.25s;
-}
-.user_repos .repos_header input:hover {
-  border-color: #646cff;
-}
-
-.container_repos {
-  padding-right: 10px;
-  overflow-y: scroll;
-}
-
-.user_repos .card_repos {
-  color: rgb(230, 230, 230);
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: #afafaf4d solid 1px;
-  border: none;
-  background-color: #0f477544;
-  backdrop-filter: blur(50px);
-}
-.user_repos .card_repos p {
-  font-size: 20px;
-}
-.user_repos .card_repos small {
-  color: rgb(187, 187, 187);
-  font-size: 11px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.user_repos .card_repos_infos {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  justify-content: end;
-}
-.user_repos .card_repos_infos a {
-  display: flex;
-  align-items: center;
-}
-
 @media screen and (max-width: 830px) {
   .user_page {
     grid-template-columns: auto;
@@ -183,16 +97,10 @@
   .user_card .box_img {
     width: 120px;
   }
-  .user_repos .repos_header {
-    display: block;
-  }
 }
 @media screen and (max-width: 404px) {
   .user_card .card_header {
     flex-direction: column;
-  }
-  .user_repos .card_repos p {
-    font-size: 15px;
   }
 }
 @media screen and (max-width: 364px) {
